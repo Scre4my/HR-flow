@@ -37,6 +37,9 @@ class Question
     #[ORM\Column]
     private int $position = 0;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $pageNumber = null;
+
     #[ORM\ManyToOne(targetEntity: Survey::class, inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Survey $survey = null;
@@ -109,6 +112,17 @@ class Question
         return $this;
     }
 
+    public function getPageNumber(): ?int
+    {
+        return $this->pageNumber;
+    }
+
+    public function setPageNumber(?int $pageNumber): static
+    {
+        $this->pageNumber = $pageNumber;
+        return $this;
+    }
+
     public function getSurvey(): ?Survey
     {
         return $this->survey;
@@ -134,6 +148,7 @@ class Question
             'options' => $this->options,
             'isRequired' => $this->isRequired,
             'position' => $this->position,
+            'pageNumber' => $this->pageNumber,
         ];
     }
 }

@@ -57,6 +57,9 @@ class SurveyController extends AbstractController
         $survey->setTitle($data['title']);
         $survey->setDescription($data['description'] ?? null);
         $survey->setIsActive($data['isActive'] ?? true);
+        $survey->setSurveyType($data['surveyType'] ?? 'single_page');
+        $survey->setPages($data['pages'] ?? null);
+        $survey->setTransitions($data['transitions'] ?? null);
 
         if (!empty($data['questions'])) {
             foreach ($data['questions'] as $index => $qData) {
@@ -66,6 +69,7 @@ class SurveyController extends AbstractController
                 $question->setOptions($qData['options'] ?? null);
                 $question->setIsRequired($qData['isRequired'] ?? true);
                 $question->setPosition($qData['position'] ?? $index);
+                $question->setPageNumber($qData['pageNumber'] ?? null);
                 $survey->addQuestion($question);
             }
         }
@@ -95,6 +99,15 @@ class SurveyController extends AbstractController
         if (isset($data['isActive'])) {
             $survey->setIsActive($data['isActive']);
         }
+        if (isset($data['surveyType'])) {
+            $survey->setSurveyType($data['surveyType']);
+        }
+        if (isset($data['pages'])) {
+            $survey->setPages($data['pages']);
+        }
+        if (isset($data['transitions'])) {
+            $survey->setTransitions($data['transitions']);
+        }
 
         if (isset($data['questions'])) {
             foreach ($survey->getQuestions() as $question) {
@@ -108,6 +121,7 @@ class SurveyController extends AbstractController
                 $question->setOptions($qData['options'] ?? null);
                 $question->setIsRequired($qData['isRequired'] ?? true);
                 $question->setPosition($qData['position'] ?? $index);
+                $question->setPageNumber($qData['pageNumber'] ?? null);
                 $survey->addQuestion($question);
             }
         }

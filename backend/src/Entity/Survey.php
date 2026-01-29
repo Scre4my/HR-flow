@@ -32,6 +32,15 @@ class Survey
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\Column(length: 20)]
+    private string $surveyType = 'single_page';
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $pages = null;
+
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private ?array $transitions = null;
+
     #[ORM\OneToMany(targetEntity: Question::class, mappedBy: 'survey', cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $questions;
@@ -106,6 +115,39 @@ class Survey
         return $this;
     }
 
+    public function getSurveyType(): string
+    {
+        return $this->surveyType;
+    }
+
+    public function setSurveyType(string $surveyType): static
+    {
+        $this->surveyType = $surveyType;
+        return $this;
+    }
+
+    public function getPages(): ?array
+    {
+        return $this->pages;
+    }
+
+    public function setPages(?array $pages): static
+    {
+        $this->pages = $pages;
+        return $this;
+    }
+
+    public function getTransitions(): ?array
+    {
+        return $this->transitions;
+    }
+
+    public function setTransitions(?array $transitions): static
+    {
+        $this->transitions = $transitions;
+        return $this;
+    }
+
     public function getQuestions(): Collection
     {
         return $this->questions;
@@ -142,6 +184,9 @@ class Survey
             'title' => $this->title,
             'description' => $this->description,
             'isActive' => $this->isActive,
+            'surveyType' => $this->surveyType,
+            'pages' => $this->pages,
+            'transitions' => $this->transitions,
             'createdAt' => $this->createdAt?->format('Y-m-d H:i:s'),
             'updatedAt' => $this->updatedAt?->format('Y-m-d H:i:s'),
             'questionsCount' => $this->questions->count(),
