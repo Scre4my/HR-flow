@@ -150,7 +150,7 @@ export default function PublicSurvey() {
         const answer = answers[questionId];
         let matches = false;
 
-        if (answer !== undefined) {
+        if (answer !== undefined && answer !== null) {
           const answerStr = typeof answer === 'object' && 'selected' in answer
             ? String((answer as ComboAnswer).selected)
             : String(answer);

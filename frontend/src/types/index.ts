@@ -47,7 +47,7 @@ export interface Survey {
 
 export interface Answer {
   questionId: number;
-  value: string | string[] | number | null;
+  value: string | string[] | number | null | ComboAnswer;
 }
 
 export interface SurveyResponse {
