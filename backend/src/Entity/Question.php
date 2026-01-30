@@ -16,6 +16,8 @@ class Question
     public const TYPE_SINGLE_CHOICE = 'single_choice';
     public const TYPE_MULTIPLE_CHOICE = 'multiple_choice';
     public const TYPE_RATING = 'rating';
+    public const TYPE_RADIO_TEXT = 'radio_text';
+    public const TYPE_CHECKBOX_TEXT = 'checkbox_text';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

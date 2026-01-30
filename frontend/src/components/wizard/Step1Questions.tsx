@@ -5,6 +5,8 @@ const questionTypes = [
   { value: 'single_choice', label: 'Один вариант' },
   { value: 'multiple_choice', label: 'Множественный выбор' },
   { value: 'rating', label: 'Шкала оценки (1-10)' },
+  { value: 'radio_text', label: 'Один вариант + текст' },
+  { value: 'checkbox_text', label: 'Множественный выбор + текст' },
 ];
 
 interface Step1Props {
@@ -131,7 +133,7 @@ export default function Step1Questions({
                 value={question.type}
                 onChange={e => updateQuestion(qIndex, {
                   type: e.target.value as Question['type'],
-                  options: ['single_choice', 'multiple_choice'].includes(e.target.value) ? [''] : []
+                  options: ['single_choice', 'multiple_choice', 'radio_text', 'checkbox_text'].includes(e.target.value) ? [''] : []
                 })}
               >
                 {questionTypes.map(t => (
@@ -153,7 +155,7 @@ export default function Step1Questions({
             </div>
           </div>
 
-          {(question.type === 'single_choice' || question.type === 'multiple_choice') && (
+          {['single_choice', 'multiple_choice', 'radio_text', 'checkbox_text'].includes(question.type) && (
             <div className="options-list">
               <label>Варианты ответов</label>
               {(question.options || []).map((option, oIndex) => (

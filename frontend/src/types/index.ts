@@ -1,11 +1,16 @@
 export interface Question {
   id?: number;
   text: string;
-  type: 'text' | 'single_choice' | 'multiple_choice' | 'rating';
+  type: 'text' | 'single_choice' | 'multiple_choice' | 'rating' | 'radio_text' | 'checkbox_text';
   options?: string[];
   isRequired: boolean;
   position: number;
   pageNumber?: number | null;
+}
+
+export interface ComboAnswer {
+  selected: string | string[];
+  text?: string;
 }
 
 export interface PageConfig {
